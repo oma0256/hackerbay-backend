@@ -1,0 +1,1 @@
+exports.userLoggedIn = 'Loggedin successfully.';
