@@ -11,7 +11,9 @@ exports.login = (req, res) => {
     error.data = errors.array();
     throw error;
   }
-  const { username } = req.body;
+  const {
+    body: { username },
+  } = req;
   const payload = { username };
   const token = generateToken(payload);
   return res.status(200).json({ message: userLoggedIn, token, username });

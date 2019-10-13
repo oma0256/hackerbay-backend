@@ -1,11 +1,15 @@
 const { expect } = require('chai');
 const request = require('supertest');
-const app = require('../server');
+const server = require('../server');
 const messages = require('../messages/controllers/login');
 const { invalidInputs } = require('../messages/index');
 
 describe('login contoller', () => {
   let userData;
+  // eslint-disable-next-line no-undef
+  after(() => {
+    server.close();
+  });
 
   // eslint-disable-next-line no-undef
   beforeEach(() => {
@@ -13,7 +17,7 @@ describe('login contoller', () => {
   });
 
   it('user can login successfully', done => {
-    request(app)
+    request(server)
       .post('/login')
       .send(userData)
       .end((err, res) => {
@@ -32,7 +36,7 @@ describe('login contoller', () => {
 
   it('user cannot login without username and password', done => {
     userData = {};
-    request(app)
+    request(server)
       .post('/login')
       .send(userData)
       .end((err, res) => {
@@ -47,7 +51,7 @@ describe('login contoller', () => {
 
   it('user cannot login with invalid username', done => {
     userData.username = '';
-    request(app)
+    request(server)
       .post('/login')
       .send(userData)
       .end((err, res) => {
@@ -62,7 +66,7 @@ describe('login contoller', () => {
 
   it('user cannot login with invalid password', done => {
     userData.password = '';
-    request(app)
+    request(server)
       .post('/login')
       .send(userData)
       .end((err, res) => {
