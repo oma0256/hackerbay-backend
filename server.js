@@ -2,12 +2,15 @@ const express = require('express');
 const log = require('fancy-log');
 const bodyParser = require('body-parser');
 const loginRoute = require('./routes/login');
+const thumbnailRoute = require('./routes/thumbnail');
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(express.static('images'));
 
 app.use('/login', loginRoute);
+app.use('/thumbnail', thumbnailRoute);
 
 app.use((error, req, res, next) =>
   res
