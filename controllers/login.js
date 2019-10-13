@@ -1,16 +1,9 @@
-const { validationResult } = require('express-validator');
 const { generateToken } = require('../utils/jwt');
 const { userLoggedIn } = require('../messages/controllers/login');
-const { invalidInputs } = require('../messages');
+const { errorHandler } = require('../utils/error-handler');
 
 exports.login = (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const error = new Error(invalidInputs);
-    error.statusCode = 422;
-    error.data = errors.array();
-    throw error;
-  }
+  errorHandler(req);
   const {
     body: { username },
   } = req;
