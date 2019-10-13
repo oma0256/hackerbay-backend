@@ -15,6 +15,6 @@ app.use((error, req, res, next) =>
     .json({ message: error.message, errors: error.data })
 );
 
-const server = app.listen(3000, () => log('Server running on port 8000'));
+const server = app.listen(8000, () => log('Server running on port 8000'));
 
 module.exports = server;
