@@ -14,7 +14,7 @@ exports.thumbnailValidators = [
     .custom(imageUrl => {
       const splitImageUrl = imageUrl.split('.');
       const imageExtension = splitImageUrl[splitImageUrl.length - 1];
-      const supportedExtensions = ['jpeg', 'png', 'webp'];
+      const supportedExtensions = ['jpeg', 'jpg', 'png', 'webp'];
       if (!supportedExtensions.includes(imageExtension)) {
         throw new Error(messages.invalidImageType);
       }
