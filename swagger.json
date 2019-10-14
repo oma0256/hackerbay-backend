@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "v1",
+    "title": "HackerBay Backend",
+    "description": "A simple API to create a thumbnail and patch a document."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Development server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Bearer"
+      }
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Login to access the private routes",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "oma0256"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "pass1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully loggedin"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/json-patch": {
+      "post": {
+        "tags": ["Json Patch"],
+        "summary": "Update a document based on the patch",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "document": {
+                    "type": "object",
+                    "example": {}
+                  },
+                  "patch": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    },
+                    "example": [
+                      {
+                        "op": "add",
+                        "path": "/foo",
+                        "value": "bar"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "document updated successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "unauthorized access"
+          }
+        }
+      }
+    },
+    "/thumbnail": {
+      "post": {
+        "tags": ["Thumbnail"],
+        "summary": "Create a thumbnail from a public url",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageUrl": {
+                    "type": "object",
+                    "example": "https://okay.cool.jpg"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created a thumbnail from an image"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized access must be logged in"
+          }
+        }
+      }
+    }
+  }
+}
