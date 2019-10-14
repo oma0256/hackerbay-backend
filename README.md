@@ -14,7 +14,8 @@ You have to have nodejs installed on your computer.
 
 #### Installing
 
-Navigate into the project's root directory in the terminal the run `npm install` to install the project's dependencies.
+- Navigate into the project's root directory in the terminal the run `npm install` to install the project's dependencies.
+- Create a `.env` file in the project's root directory. Follow the example in `.env-example` to setup your `.env` file.
 
 #### Running the tests
 
@@ -23,6 +24,12 @@ To run the tests run `npm test` in your terminal.
 #### Running the application
 
 To start the application run `npm start` in your terminal. You can access the swagger documentation of the application using route `http://localhost:8000`.
+
+### Docker Setup
+
+- Make sure you have docker installed on your computer.
+- Navigate to the project's root directory in the terminal then run `docker -t <your_docker_id>:hackerbay-backend build .`
+- Start the application by running the command `docker run -p 8000:8000 <your_docker_id>:hackerbay-backend`
 
 ## Features
 
