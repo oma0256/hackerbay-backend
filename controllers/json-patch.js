@@ -1,7 +1,9 @@
 const jsonpatch = require('json-patch');
 const messages = require('../messages/controllers/json-patch');
+const { errorHandler } = require('../utils/error-handler');
 
 exports.jsonPatch = (req, res) => {
+  errorHandler(req);
   const {
     body: { document, patch },
   } = req;
