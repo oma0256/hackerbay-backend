@@ -7,13 +7,13 @@ const { invalidInputs } = require('../messages/index');
 describe('login contoller', () => {
   let userData;
   // eslint-disable-next-line no-undef
-  after(() => {
-    server.close();
+  beforeEach(() => {
+    userData = { username: 'oma0256', password: 'pass1234' };
   });
 
   // eslint-disable-next-line no-undef
-  beforeEach(() => {
-    userData = { username: 'oma0256', password: 'pass1234' };
+  after(() => {
+    server.close();
   });
 
   it('user can login successfully', done => {
@@ -30,8 +30,8 @@ describe('login contoller', () => {
         expect(message).to.equal(messages.userLoggedIn);
         expect(username).to.equal(userData.username);
         expect(body).to.have.property('token');
-        done();
       });
+    done();
   });
 
   it('user cannot login without username and password', done => {
@@ -45,8 +45,8 @@ describe('login contoller', () => {
         expect(body.message).to.equal(invalidInputs);
         expect(body).not.to.have.property('token');
         expect(body).to.have.property('errors');
-        done();
       });
+    done();
   });
 
   it('user cannot login with invalid username', done => {
@@ -60,8 +60,8 @@ describe('login contoller', () => {
         expect(body.message).to.equal(invalidInputs);
         expect(body).not.to.have.property('token');
         expect(body).to.have.property('errors');
-        done();
       });
+    done();
   });
 
   it('user cannot login with invalid password', done => {
@@ -75,7 +75,7 @@ describe('login contoller', () => {
         expect(body.message).to.equal(invalidInputs);
         expect(body).not.to.have.property('token');
         expect(body).to.have.property('errors');
-        done();
       });
+    done();
   });
 });

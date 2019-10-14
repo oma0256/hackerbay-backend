@@ -9,11 +9,6 @@ describe('thumbnail contoller', () => {
   let imageData;
   let token;
   // eslint-disable-next-line no-undef
-  after(() => {
-    server.close();
-  });
-
-  // eslint-disable-next-line no-undef
   before(() => {
     token = generateToken({ username: 'oma0256' });
   });
@@ -24,6 +19,11 @@ describe('thumbnail contoller', () => {
       imageUrl:
         'https://cnet3.cbsistatic.com/img/yjrw7VgWV7a95AvK8Ym0Np4bFXY=/1200x675/2017/06/27/13484418-bfd9-41e2-8f2d-9b4afb072da8/apple-macbook-pro-15-inch-2017-14.jpg',
     };
+  });
+
+  // eslint-disable-next-line no-undef
+  after(() => {
+    server.close();
   });
 
   it('thumbnail created successfully', done => {

@@ -7,8 +7,9 @@ exports.jsonPatch = (req, res) => {
   const {
     body: { document, patch },
   } = req;
-  const result = jsonpatch.apply(document, patch);
+  const doc = JSON.parse(document);
+  jsonpatch.apply(doc, JSON.parse(patch));
   return res
     .status(200)
-    .json({ message: messages.documentPatched, document: result });
+    .json({ message: messages.documentPatched, document: doc });
 };

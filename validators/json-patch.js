@@ -16,6 +16,14 @@ exports.jsonPatch = [
     .not()
     .isEmpty()
     .withMessage(messages.requiredPatch)
-    .isArray({ min: 1 })
-    .withMessage(messages.invalidPatch),
+    .custom(patch => {
+      const patchArray = JSON.parse(patch);
+      if (
+        (Array.isArray(patchArray) && patchArray.length < 1) ||
+        !Array.isArray(patchArray)
+      ) {
+        throw new Error(messages.invalidPatch);
+      }
+      return true;
+    }),
 ];

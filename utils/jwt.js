@@ -29,7 +29,7 @@ exports.checkUserIsAuthenticated = (req, res, next) => {
     error.statusCode = 401;
     throw error;
   }
-  const token = authHeader.split(' ')[1];
+  const token = splitAuthHeader[1];
   const { username } = this.decodeToken(token);
   req.username = username;
   next();
