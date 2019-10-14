@@ -1,22 +1,19 @@
 const { body } = require('express-validator');
-const {
-  requiredUsername,
-  requiredPassword,
-} = require('../messages/validators/login');
+const messages = require('../messages/validators/login');
 
 exports.loginValidators = [
   body('username')
     .exists()
-    .withMessage(requiredUsername)
+    .withMessage(messages.requiredUsername)
     .trim()
-    .not()
-    .isEmpty()
-    .withMessage(requiredUsername),
+    .isAlphanumeric()
+    .withMessage(messages.invalidUsername)
+    .isLength({ min: 3 })
+    .withMessage(messages.shortUsername),
   body('password')
     .exists()
-    .withMessage(requiredPassword)
+    .withMessage(messages.requiredPassword)
     .trim()
-    .not()
-    .isEmpty()
-    .withMessage(requiredPassword),
+    .isLength({ min: 3 })
+    .withMessage(messages.invalidPassword),
 ];

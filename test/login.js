@@ -49,8 +49,8 @@ describe('login contoller', () => {
     done();
   });
 
-  it('user cannot login with invalid username', done => {
-    userData.username = '';
+  it('user cannot login with short username', done => {
+    userData.username = 'sd';
     request(server)
       .post('/login')
       .send(userData)
@@ -64,8 +64,23 @@ describe('login contoller', () => {
     done();
   });
 
-  it('user cannot login with invalid password', done => {
-    userData.password = '';
+  it('user cannot login with short password', done => {
+    userData.password = 'as';
+    request(server)
+      .post('/login')
+      .send(userData)
+      .end((err, res) => {
+        const { status, body } = res;
+        expect(status).to.equal(422);
+        expect(body.message).to.equal(invalidInputs);
+        expect(body).not.to.have.property('token');
+        expect(body).to.have.property('errors');
+      });
+    done();
+  });
+
+  it('user cannot login with invalid username', done => {
+    userData.username = 'sd;;::';
     request(server)
       .post('/login')
       .send(userData)

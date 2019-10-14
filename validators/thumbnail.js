@@ -6,16 +6,10 @@ exports.thumbnailValidators = [
     .exists()
     .withMessage(messages.requiredImageUrl)
     .trim()
-    .not()
-    .isEmpty()
-    .withMessage(messages.requiredImageUrl)
     .isURL()
     .withMessage(messages.invalidImageUrl)
     .custom(imageUrl => {
-      const splitImageUrl = imageUrl.split('.');
-      const imageExtension = splitImageUrl[splitImageUrl.length - 1];
-      const supportedExtensions = ['jpeg', 'jpg', 'png', 'webp'];
-      if (!supportedExtensions.includes(imageExtension)) {
+      if (!imageUrl.match(/\.jpg|\.jpeg|\.png|\.webp/)) {
         throw new Error(messages.invalidImageType);
       }
       return true;
