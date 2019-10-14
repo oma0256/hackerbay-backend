@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const messages = require('../messages/validators/thumbnail');
+const messages = require('../messages/middlewares/thumbnail');
 
 exports.thumbnailValidators = [
   body('imageUrl')

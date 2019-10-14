@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const messages = require('../messages/validators/json-patch');
+const messages = require('../messages/middlewares/json-patch');
 
 exports.jsonPatchValidators = [
   body('document')

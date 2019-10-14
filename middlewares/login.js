@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const messages = require('../messages/validators/login');
+const messages = require('../messages/middlewares/login');
 
 exports.loginValidators = [
   body('username')

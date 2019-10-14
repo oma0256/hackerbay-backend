@@ -22,8 +22,8 @@ exports.createThumbnail = async (req, res, next) => {
       url: imageUrl,
       dest: imagePath,
     };
-    const { filename } = await download.image(options);
-    const image = await jimp.read(filename);
+    const { filename } = await download.image(options); // download image from the url
+    const image = await jimp.read(filename); // resize the image and save it
     await image.resize(50, 50).writeAsync(filename);
     return res.status(201).json({
       message: messages.thumbnailCreated,
