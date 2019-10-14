@@ -4,6 +4,13 @@ const sharp = require('sharp');
 const messages = require('../messages/controllers/thumbnail');
 const { errorHandler } = require('../utils/error-handler');
 
+/**
+ * Creates a thumbnail based on the public url
+ * @param {object} req Request object
+ * @param {object} res Response object
+ * @param {method} next Method used to call the next middleware
+ * @returns {object} An object with a message and thumbnail
+ */
 exports.createThumbnail = async (req, res, next) => {
   try {
     errorHandler(req);

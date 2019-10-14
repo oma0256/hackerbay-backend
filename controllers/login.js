@@ -2,6 +2,12 @@ const { generateToken } = require('../utils/jwt');
 const { userLoggedIn } = require('../messages/controllers/login');
 const { errorHandler } = require('../utils/error-handler');
 
+/**
+ * Login a user
+ * @param {object} req Request object
+ * @param {object} res Response object
+ * @returns {object} An object with a message, token and username
+ */
 exports.login = (req, res) => {
   errorHandler(req);
   const {
